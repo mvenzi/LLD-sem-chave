@@ -1,0 +1,49 @@
+Exemplo de json:
+
+[
+   "ascend_20240721",
+   "sector_score_20240825",   
+   "sector_score_20240922"
+]
+Após aplicar esse preprocessamento em Javascipt
+####################CODIGO#######################
+var original_value = JSON.parse(value);
+var new_json = [];
+
+for(i = 0; i < original_value.length; i++){
+  var temp_dict = {}
+  temp_dict["TableName"] = original_value[i];
+  new_json.push(temp_dict);
+}
+
+return JSON.stringify(new_json);
+#################################################
+Nova saida
+[
+   {
+      "TableName":"ascend_20240721"
+   },
+   {
+      "TableName":"sector_score_20240825"
+   },
+   {
+      "TableName":"sector_score_20240922"
+   }
+]
+________________________________________________
+outro exemplo:
+
+const data = [
+    "ascend_20240721",
+    "cs_bureau_pf_20240911",
+    "cs_bureau_pf_20240913",
+    // ... (restante dos itens)];
+function generateLLD(data) {
+    const lld = { data: [] };
+    data.forEach(item => {
+        lld.data.push({ "{#ITEMNAME}": item });
+    });    return JSON.stringify(lld, null, 4);
+}
+
+// Gerar a saída LLDconst lldOutput = generateLLD(data);
+console.log(lldOutput);
